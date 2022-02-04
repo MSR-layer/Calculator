@@ -3,6 +3,7 @@ html, body{
     justify-content: center;
     align-items: center;
     height: 100%;
+    font-size: larger;
 }
 
 #calc-body{
@@ -18,6 +19,7 @@ html, body{
     background-color: aqua;
     padding: 10px;
     gap: 10px;
+    
     /* justify-content: center;
     align-items: center; */
 
@@ -26,10 +28,17 @@ html, body{
 button {
     height: auto;
     width: auto;
+    font-size: larger;
 }
 
 #calc-screen {
     height: 100px;
     width: 400px;
     background-color: grey;
+    display: flex;
+    flex-direction: column;
+}
+
+#result {
+    font-size: 40px;
 }
