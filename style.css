@@ -1,0 +1,35 @@
+html, body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#calc-body{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#calc-buttons{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    height: 400px;
+    background-color: aqua;
+    padding: 10px;
+    gap: 10px;
+    /* justify-content: center;
+    align-items: center; */
+
+}
+
+button {
+    height: auto;
+    width: auto;
+}
+
+#calc-screen {
+    height: 100px;
+    width: 400px;
+    background-color: grey;
+}
