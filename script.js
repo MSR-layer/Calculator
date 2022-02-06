@@ -11,22 +11,24 @@ let operation = '';
 
 function displayCurrentNumber(){
     resultScreen.textContent = '';
+    
     let obj = operation.split(' ');
-    resultScreen.textContent = obj[2];
+    if(obj[2])
+        resultScreen.textContent = obj[2];
+    else
+        resultScreen.textContent = obj[0];
+    
+
+}
+
+function updateScreen(){
+    screen.textContent = operation;
 }
 
 function displayContent(){ 
-    //88 + 14
+    
     operation += `${this.textContent}`;
-    if(hasOperand){
-        //resultScreen.textContent = '';
-        //resultScreen.textContent += `${this.textContent}`;
-        displayCurrentNumber();
-    }else
-    {
-        screen.textContent = operation;
-        resultScreen.textContent += `${this.textContent}`;
-    }
+    displayCurrentNumber();
     
 }
 
@@ -41,39 +43,47 @@ function clearScreen(){
 function deleteChar(){
     if(screen.textContent.endsWith('.')) hasDP = 0;
     else if(operandList.some(o => screen.textContent.endsWith(o))) hasOperand = 0;
-    //screen.textContent = screen.textContent.slice(0, -2);
     result.textContent = result.textContent.slice(0, -1);
     operation = operation.slice(0, -1);
 }
 
 let hasDP = 0;
 function addDecimalPoint(){
-    if(!hasDP && !operandList.some(o => screen.textContent.endsWith(o))){
-        hasDP = 1;
-        screen.textContent += '.'; 
-    }
+    
+    if(!hasDP)
+        operation += '.';
+    
+    displayCurrentNumber();
 
 }
 
 hasOperand = 0;
 function addOperand(){
 
-    if(!hasOperand /*&& !screen.textContent.endsWith('.')*/){
+    resultScreen.textContent = '';
+
+    if(!hasOperand){
         hasOperand = 1;
         hasDP = 0;
         operation += ` ${this.textContent} `;
-        screen.textContent = operation; 
-    }else if(hasOperand && operandList.some(o => screen.textContent.endsWith(o))){
-        screen.textContent = screen.textContent.slice(0, -2);
-        screen.textContent += ` ${this.textContent} `;
+    }else if(hasOperand && operandList.some(o => operation.endsWith(` ${o} `))){
+        operation = operation.slice(0, -3);
+        operation += ` ${this.textContent} `;
+    }else if(hasOperand){
+        evaluate();
+        operation += ` ${this.textContent} `;
     }
-    
+
+    updateScreen();
+    displayCurrentNumber();
 }
 
 function evaluate(){
     console.log(operation);
     const obj = operation.split(' ');
     console.log(obj);
+
+    if(!obj[2]) return;
 
     a = parseFloat(obj[0]);
     b = parseFloat(obj[2]);
@@ -85,14 +95,29 @@ function evaluate(){
         result = (a - b);
     if(obj[1] === '×')
         result = (a * b);
-    if(obj[1] === '÷')
+    if(obj[1] === '÷'){
+        if(b === 0) {
+            resultScreen.textContent = 'why would you do that lmao';
+            return;
+        }
         result = (a / b);
-    
+    }
     console.log(result);
 
     operation += ' =';
     screen.textContent = operation;
     resultScreen.textContent = result;
+    // displayCurrentNumber();
+    // updateScreen();
+
+    operation = '';
+    operation += result; 
+    //
+}
+
+function equalEvaluate(){
+    evaluate();
+    hasOperand = 0;
 }
 
 const numButtons = Array.from(document.querySelectorAll('#calc-buttons .num.input'));
@@ -114,4 +139,4 @@ deleteButton.addEventListener('click', deleteChar);
 
 decimalButton.addEventListener('click', addDecimalPoint);
 
-equalButton.addEventListener('click', evaluate);
+equalButton.addEventListener('click', equalEvaluate);
