@@ -107,12 +107,9 @@ function evaluate(){
     operation += ' =';
     screen.textContent = operation;
     resultScreen.textContent = result;
-    // displayCurrentNumber();
-    // updateScreen();
 
     operation = '';
     operation += result; 
-    //
 }
 
 function equalEvaluate(){
@@ -140,3 +137,43 @@ deleteButton.addEventListener('click', deleteChar);
 decimalButton.addEventListener('click', addDecimalPoint);
 
 equalButton.addEventListener('click', equalEvaluate);
+
+document.addEventListener('keydown',e => keyboardSupport(e));
+
+function keyboardSupport(e){
+    /***
+     * 1 => 97, 49
+     * 2 => 98, 50
+     * 9 => 105, 57
+     * 0 => 96, 48
+     * 
+     * . => 190
+     * 
+     * / => 111
+     * * => 106
+     * - => 109
+     * + => 107
+     * ent => 13
+     * 
+     * 
+    */
+   console.log(e);
+    if(e.key === '0') operation += 0;
+    if(e.key === '1') operation += 1;
+    if(e.key === '2') operation += 2;
+    if(e.key === '3')  operation += 3;
+    if(e.key === '4') operation += 4;
+    if(e.key === '5') operation += 5;
+    if(e.key === '6') operation += 6;
+    if(e.key === '7') operation += 7;
+    if(e.key === '8') operation += 8;
+    if(e.key === '9') operation += 9;
+    if(e.key === '+') operation += e.key;
+    if(e.key === '-') operation += e.key;
+    if(e.key === '*') operation += e.key;
+    if(e.key === '/') operation += e.key;
+
+    displayCurrentNumber();
+    updateScreen();
+    
+}
