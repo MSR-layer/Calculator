@@ -7,12 +7,27 @@ const operandList = [
 
 const screen = document.querySelector('#equation');
 const resultScreen = document.querySelector('#result');
+let operation = '';
+
+function displayCurrentNumber(){
+    resultScreen.textContent = '';
+    let obj = operation.split(' ');
+    resultScreen.textContent = obj[2];
+}
 
 function displayContent(){ 
-    if(screen.textContent.endsWith('.')) 
-        screen.textContent += `${this.textContent}`;
-    else
-        screen.textContent += `${this.textContent}`;
+    //88 + 14
+    operation += `${this.textContent}`;
+    if(hasOperand){
+        //resultScreen.textContent = '';
+        //resultScreen.textContent += `${this.textContent}`;
+        displayCurrentNumber();
+    }else
+    {
+        screen.textContent = operation;
+        resultScreen.textContent += `${this.textContent}`;
+    }
+    
 }
 
 function clearScreen(){
@@ -20,13 +35,15 @@ function clearScreen(){
     hasOperand = 0; 
     screen.textContent = '';
     resultScreen.textContent = '';
+    operation = '';
 }
 
 function deleteChar(){
-    
     if(screen.textContent.endsWith('.')) hasDP = 0;
     else if(operandList.some(o => screen.textContent.endsWith(o))) hasOperand = 0;
-    screen.textContent = screen.textContent.slice(0, -2);
+    //screen.textContent = screen.textContent.slice(0, -2);
+    result.textContent = result.textContent.slice(0, -1);
+    operation = operation.slice(0, -1);
 }
 
 let hasDP = 0;
@@ -40,21 +57,22 @@ function addDecimalPoint(){
 
 hasOperand = 0;
 function addOperand(){
+
     if(!hasOperand /*&& !screen.textContent.endsWith('.')*/){
         hasOperand = 1;
         hasDP = 0;
-        screen.textContent += ` ${this.textContent} `; 
+        operation += ` ${this.textContent} `;
+        screen.textContent = operation; 
     }else if(hasOperand && operandList.some(o => screen.textContent.endsWith(o))){
         screen.textContent = screen.textContent.slice(0, -2);
-        screen.textContent += ` ${this.textContent} `
+        screen.textContent += ` ${this.textContent} `;
     }
+    
 }
 
 function evaluate(){
-    const str = screen.textContent;
-    console.log(str);
-    const obj = str.split(' ');
-    //obj.shift();
+    console.log(operation);
+    const obj = operation.split(' ');
     console.log(obj);
 
     a = parseFloat(obj[0]);
@@ -72,6 +90,8 @@ function evaluate(){
     
     console.log(result);
 
+    operation += ' =';
+    screen.textContent = operation;
     resultScreen.textContent = result;
 }
 
