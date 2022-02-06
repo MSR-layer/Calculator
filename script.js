@@ -6,18 +6,20 @@ const operandList = [
 ];
 
 const screen = document.querySelector('#equation');
+const resultScreen = document.querySelector('#result');
 
 function displayContent(){ 
     if(screen.textContent.endsWith('.')) 
         screen.textContent += `${this.textContent}`;
     else
-        screen.textContent += ` ${this.textContent}`;
+        screen.textContent += `${this.textContent}`;
 }
 
 function clearScreen(){
     hasDP = 0;
     hasOperand = 0; 
     screen.textContent = '';
+    resultScreen.textContent = '';
 }
 
 function deleteChar(){
@@ -41,10 +43,10 @@ function addOperand(){
     if(!hasOperand /*&& !screen.textContent.endsWith('.')*/){
         hasOperand = 1;
         hasDP = 0;
-        screen.textContent += ` ${this.textContent}`; 
+        screen.textContent += ` ${this.textContent} `; 
     }else if(hasOperand && operandList.some(o => screen.textContent.endsWith(o))){
         screen.textContent = screen.textContent.slice(0, -2);
-        screen.textContent += ` ${this.textContent}`
+        screen.textContent += ` ${this.textContent} `
     }
 }
 
@@ -52,7 +54,7 @@ function evaluate(){
     const str = screen.textContent;
     console.log(str);
     const obj = str.split(' ');
-    obj.shift();
+    //obj.shift();
     console.log(obj);
 
     a = parseFloat(obj[0]);
@@ -67,8 +69,10 @@ function evaluate(){
         result = (a * b);
     if(obj[1] === '÷')
         result = (a / b);
+    
+    console.log(result);
 
-    document.querySelector('#result').textContent = result;
+    resultScreen.textContent = result;
 }
 
 const numButtons = Array.from(document.querySelectorAll('#calc-buttons .num.input'));
