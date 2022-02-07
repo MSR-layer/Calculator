@@ -1,42 +1,74 @@
+/**
+1)*****
+11052C
+3D087B
+F43B86
+FFE459
+
+2)*****
+194350
+FF8882
+FFC2B4
+9DBEB9
+*/
+
+
+
 html, body{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     font-size: larger;
+    background-color: #191919;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #calc-body{
     display: flex;
     flex-direction: column;
-    
+    border-radius: 10px;
+    padding: 10px;
+    background-color:#2D4263;
 }
 
 #calc-buttons{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     display: grid;
     grid-template-columns: auto auto auto;
     height: 400px;
-    background-color: aqua;
-    padding: 10px;
     gap: 10px;
     
-    /* justify-content: center;
-    align-items: center; */
 
 }
 
 button {
+    border-radius: 10px;
     height: auto;
     width: auto;
     font-size: larger;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #C84B31;
+    border-style: solid;
+    color: #191919;
+    border-color:#191919;
+
 }
 
 #calc-screen {
+    color: #191919;
+    padding: 10px;
+    border-radius: 10px;
     height: 100px;
     width: 400px;
-    background-color: grey;
     display: flex;
     flex-direction: column;
+    background-color: #ECDBBA;
+    border-style: solid;
+    border-width:2px;
+    border-color:#191919;
+    margin-bottom:10px;
 }
 
 #result {

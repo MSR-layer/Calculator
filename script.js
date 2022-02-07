@@ -26,7 +26,7 @@ function updateScreen(){
 }
 
 function displayContent(e){ 
-    if(e === undefined){
+    if(!e.key){
         operation += `${this.textContent}`;
         displayCurrentNumber();
         return;
@@ -55,8 +55,10 @@ function deleteChar(){
 let hasDP = 0;
 function addDecimalPoint(){
     
-    if(!hasDP)
+    if(!hasDP){
         operation += '.';
+        hasDP = 1;
+    }
     
     displayCurrentNumber();
 
@@ -65,7 +67,7 @@ function addDecimalPoint(){
 hasOperand = 0;
 function addOperand(e){
 
-    if(e !== undefined)
+    if(e.key)
     {
         
         resultScreen.textContent = '';
