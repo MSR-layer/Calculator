@@ -1,16 +1,4 @@
-/**
-1)*****
-11052C
-3D087B
-F43B86
-FFE459
 
-2)*****
-194350
-FF8882
-FFC2B4
-9DBEB9
-*/
 
 
 
@@ -38,7 +26,7 @@ html, body{
     border-bottom-right-radius: 10px;
     display: grid;
     grid-template-columns: auto 23%;
-    height: 350px;
+    height: 300px;
     gap: 10px;
 }
 
@@ -67,7 +55,7 @@ button:hover{
     padding: 16px;
     border-radius: 10px;
     height: 100px;
-    width: 350px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     background-color: #ECDBBA;

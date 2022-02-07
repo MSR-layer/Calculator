@@ -129,7 +129,7 @@ function evaluate(){
         result = (a * b);
     if(obj[1] === '÷'){
         if(b === 0) {
-            resultScreen.textContent = 'why would you do that lmao';
+            resultScreen.textContent = 'lmao';
             return;
         }
         result = (a / b);
