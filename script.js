@@ -1,3 +1,7 @@
+let audio = new Audio("audio.mp3");
+audio.load();
+audio.currentTime = 0.5;
+
 const operandList = [
     '+',
     '÷',
@@ -38,6 +42,7 @@ function displayContent(e){
 }
 
 function clearScreen(){
+    resultScreen.style.fontSize = '50px';
     hasDP = 0;
     hasOperand = 0; 
     screen.textContent = '';
@@ -129,7 +134,9 @@ function evaluate(){
         result = (a * b);
     if(obj[1] === '÷'){
         if(b === 0) {
-            resultScreen.textContent = 'lmao';
+            //document.getElementById('bruh').play();
+            audio.play();
+            resultScreen.textContent = 'Bruh';
             return;
         }
         result = (a / b);
