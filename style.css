@@ -38,7 +38,7 @@ html, body{
     border-bottom-right-radius: 10px;
     display: grid;
     grid-template-columns: auto 23%;
-    height: 400px;
+    height: 350px;
     gap: 10px;
 }
 
@@ -67,7 +67,7 @@ button:hover{
     padding: 16px;
     border-radius: 10px;
     height: 100px;
-    width: 400px;
+    width: 350px;
     display: flex;
     flex-direction: column;
     background-color: #ECDBBA;
