@@ -67,6 +67,8 @@ function addDecimalPoint(){
 hasOperand = 0;
 function addOperand(e){
 
+    if(operation==='') operation += '0';
+
     if(e.key)
     {
         
@@ -147,12 +149,20 @@ function equalEvaluate(){
     hasOperand = 0;
 }
 
+function onClick(){
+    this.classList.add('clicked');
+}
+
 const numButtons = Array.from(document.querySelectorAll('#calc-buttons .num.input'));
 const operandButtons = Array.from(document.querySelectorAll('#calc-buttons .operand.input'));
 const clearButton = document.querySelector('#clear');
 const deleteButton = document.querySelector('#delete');
 const decimalButton = document.querySelector('#dp');
 const equalButton = document.querySelector('#equal');
+
+const allButtons = Array.from(document.querySelectorAll('button'));
+
+allButtons.forEach(key => key.addEventListener('click', onClick));
 
 clearScreen();
 

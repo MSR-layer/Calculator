@@ -28,19 +28,18 @@ html, body{
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     background-color:#2D4263;
+    gap: 10px;
 }
 
 #calc-buttons{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto 23%;
     height: 400px;
     gap: 10px;
-    
-
 }
 
 button {
@@ -49,16 +48,23 @@ button {
     width: auto;
     font-size: larger;
     font-family: 'Roboto Mono', monospace;
-    background-color: #C84B31;
+    background-color: #c83631;
     border-style: solid;
     color: #191919;
     border-color:#191919;
 
 }
 
+
+
+button:hover{
+    filter: brightness(85%);
+}
+
 #calc-screen {
     color: #191919;
-    padding: 10px;
+    padding: 14px;
+    padding: 16px;
     border-radius: 10px;
     height: 100px;
     width: 400px;
@@ -69,8 +75,51 @@ button {
     border-width:2px;
     border-color:#191919;
     margin-bottom:10px;
+    margin-top: 10px;
+    position: relative;
 }
 
 #result {
-    font-size: 40px;
+    font-size: 50px;
+    position: absolute;
+    top: 59px;
+}
+
+#edit-buttons{
+    display: grid;
+    grid-template-columns: auto 48.8%;
+    gap: 10px;
+}
+
+div#edit-buttons {
+    height: 100px;
+
+}
+
+#clear{
+    background-color: #209b8f;
+}
+
+#numpad{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+}
+
+#operands{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+}
+
+#numpad button {
+    background-color: #e1a862;
+}
+
+.operand{
+    background-color: #C84B31;
+}
+
+#result{
+    float: end;
 }
