@@ -25,9 +25,14 @@ function updateScreen(){
     screen.textContent = operation;
 }
 
-function displayContent(){ 
-    
-    operation += `${this.textContent}`;
+function displayContent(e){ 
+    if(e === undefined){
+        operation += `${this.textContent}`;
+        displayCurrentNumber();
+        return;
+    }
+
+    operation += `${e.key}`;
     displayCurrentNumber();
     
 }
@@ -58,7 +63,30 @@ function addDecimalPoint(){
 }
 
 hasOperand = 0;
-function addOperand(){
+function addOperand(e){
+
+    if(e !== undefined)
+    {
+        
+        resultScreen.textContent = '';
+        let operand = e.key;
+        if(e.key === '/') operand = '÷';
+        if(e.key === '*') operand = '×';
+        if(!hasOperand){
+            hasOperand = 1;
+            hasDP = 0;
+            operation += ` ${operand} `;
+        }else if(hasOperand && operandList.some(o => operation.endsWith(` ${o} `))){
+            operation = operation.slice(0, -3);
+            operation += ` ${operand} `;
+        }else if(hasOperand){
+            evaluate();
+            operation += ` ${operand} `;
+        }
+        updateScreen();
+        displayCurrentNumber();
+        return;
+    }
 
     resultScreen.textContent = '';
 
@@ -141,39 +169,52 @@ equalButton.addEventListener('click', equalEvaluate);
 document.addEventListener('keydown',e => keyboardSupport(e));
 
 function keyboardSupport(e){
-    /***
-     * 1 => 97, 49
-     * 2 => 98, 50
-     * 9 => 105, 57
-     * 0 => 96, 48
-     * 
-     * . => 190
-     * 
-     * / => 111
-     * * => 106
-     * - => 109
-     * + => 107
-     * ent => 13
-     * 
-     * 
-    */
-   console.log(e);
-    if(e.key === '0') operation += 0;
-    if(e.key === '1') operation += 1;
-    if(e.key === '2') operation += 2;
-    if(e.key === '3')  operation += 3;
-    if(e.key === '4') operation += 4;
-    if(e.key === '5') operation += 5;
-    if(e.key === '6') operation += 6;
-    if(e.key === '7') operation += 7;
-    if(e.key === '8') operation += 8;
-    if(e.key === '9') operation += 9;
-    if(e.key === '+') operation += e.key;
-    if(e.key === '-') operation += e.key;
-    if(e.key === '*') operation += e.key;
-    if(e.key === '/') operation += e.key;
+    console.log(operation);
+    const obj = operation.split(' ');
+    //console.log(obj);
 
-    displayCurrentNumber();
-    updateScreen();
+    if(e.key === 'Enter' && obj[2]){
+        equalEvaluate();
+    }else if (e.key === '.')
+    {
+        addDecimalPoint();
+    }else if (e.key >= 0 && e.key <= 9){
+        displayContent(e);
+    }else if(operandList.some(o => e.key === `${o}`)){
+        addOperand(e);
+    }else if(e.key === 'd'){
+        clearScreen();
+    }else if(e.key === 'Backspace'){
+        deleteChar();
+    }
+
+    console.log(obj);
+   
     
+}
+
+function operate(){
+    console.log(operation);
+    const obj = operation.split(' ');
+    console.log(obj);
+
+    if(!obj[2]) return;
+
+    a = parseFloat(obj[0]);
+    b = parseFloat(obj[2]);
+
+    let result;
+    if(obj[1] === '+') 
+        result = (a + b);
+    if(obj[1] === '-')
+        result = (a - b);
+    if(obj[1] === '×')
+        result = (a * b);
+    if(obj[1] === '÷'){
+        if(b === 0) {
+            resultScreen.textContent = 'why would you do that lmao';
+            return;
+        }
+        result = (a / b);
+    }
 }
